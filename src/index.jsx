@@ -1,15 +1,11 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
-
-class App extends React.Component {
-    render() {
-      return (
-        <>
-          <p>Hello, World!</p>
-        </>
-      );
-    }
-  }
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
 const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
