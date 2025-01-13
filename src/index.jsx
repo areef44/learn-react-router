@@ -1,65 +1,40 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import FAQPage from './components/FAQPage';
-import Link from './components/Link';
 
-class App extends React.Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            page: '/'
-        };
-
-        // binding navigasi
-        this.navigate = this.navigate.bind(this);
-    }
-
-    //function untuk navigasi
-    navigate(target) {
-        this.setState(() => {
-            return {
-                page: target
-            };
-        });
-    }
-
-    render() {
-      return (
+function App() {
+    return(
         <>
             <header>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link target='/' navigate={this.navigate}>
-                                Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link target='/about' navigate={this.navigate}>
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            <Link target='/faq' navigate={this.navigate}>
-                                FAQ
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to="/faq">FAQ</Link>
+                    </li>
+                </ul>
             </header>
-
             <main>
-            {this.state.page === '/' && <HomePage />}
-            {this.state.page === '/about' && <AboutPage />}
-            {this.state.page === '/faq' && <FAQPage />}
+                <Routes>
+                    <Route path="/" element={<HomePage />}/>
+                    <Route path="/about" element={<AboutPage />}/>
+                    <Route path="/faq" element={<FAQPage />}/>
+                </Routes>
             </main>
         </>
-      )
-    }
-  }
+    )
+}
 
 const root = createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+);
